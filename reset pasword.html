@@ -12,7 +12,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('/Users/PC/Desktop/api/rt.jpg');
+            background-image: url('rt.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -90,7 +90,7 @@
         users[userIndex].password = newPassword; // Update password
         localStorage.setItem("users", JSON.stringify(users)); // Save updated users
         alert("Password reset successful! Redirecting to login...");
-        window.location.href = "file:///C:/Users/PC/Desktop/api/Login%20Page.html"; // Redirect to login
+        window.location.href = "Login%20Page.html"; // Redirect to login
     } else {
         alert("Error: User not found!");
     }
