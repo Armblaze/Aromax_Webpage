@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - AROMAX</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #222; }
+        header { background: #222; padding: 20px; text-align: center; color: #ff6f91; font-size: 28px; font-weight: bold; }
+        .container { padding: 40px; text-align: center; max-width: 800px; margin: auto; background: white; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); }
+        .cart-items { text-align: left; margin-bottom: 20px; }
+        .cart-item { display: flex; align-items: center; border-bottom: 1px solid #ddd; padding: 10px 0; }
+        .cart-item img { width: 80px; margin-right: 15px; border-radius: 5px; }
+        .checkout-form { text-align: left; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #ff6f91; border: none; padding: 12px 20px; color: white; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; width: 100%; }
+        button:hover { background: #e64a6f; }
+    </style>
+</head>
+<body>
+    <header>Checkout - AROMAX STORE</header>
+    <div class="container">
+        <h2>Your Order</h2>
+        <div class="cart-items" id="cart-items"></div>
+        <h3>Total: $<span id="total-price">0.00</span></h3>
+
+        <h2>Enter Your Details</h2>
+        <form class="checkout-form" onsubmit="return completePurchase(event)">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="address">Shipping Address:</label>
+            <input type="text" id="address" required>
+
+            <label for="payment">Payment Method:</label>
+            <select id="payment" required>
+                <option value="credit-card">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="cash-on-delivery">Cash on Delivery</option>
+            </select>
+
+            <button type="submit">Confirm Purchase</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to display cart items on checkout page
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartContainer = document.getElementById("cart-items");
+            let totalPrice = 0;
+
+            cartContainer.innerHTML = "";  // Clear previous items
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = "<p>Your cart is empty!</p>";
+                return;
+            }
+
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div>
+                            <p><strong>${item.name}</strong></p>
+                            <p>Price: $${item.price}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById("total-price").innerText = totalPrice.toFixed(2);
+        }
+
+        // Function to complete purchase
+        function completePurchase(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let address = document.getElementById("address").value;
+            let payment = document.getElementById("payment").value;
+
+            if (!name || !address || !payment) {
+                alert("Please fill in all details.");
+                return false;
+            }
+
+            alert(`Thank you, ${name}! Your order has been placed successfully.`);
+            localStorage.removeItem("cart"); // Clear cart after purchase
+            window.location.href = "index.html"; // Redirect to homepage
+
+            return false;
+        }
+
+        // Load cart items when the page loads
+        document.addEventListener("DOMContentLoaded", displayCart);
+    </script>
+</body>
+</html>
