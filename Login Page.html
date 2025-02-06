@@ -12,7 +12,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-image: url('/Users/PC/Desktop/api/rig/WhatsApp\ Image\ 2025-02-05\ at\ 23.48.58\ \(1\).jpeg');
+            background-image: url('rt.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -73,7 +73,7 @@
     </style>
 </head>
 <body>
-    <button class="home-button" onclick="window.location.href='file:///C:/Users/PC/Desktop/api/index.html'">Home</button>
+    <button class="home-button" onclick="window.location.href='index.html'">Home</button>
     
     <div class="login-container">
         <h2>Login</h2>
@@ -84,7 +84,7 @@
             <p class="error-message" id="error-message">Invalid username or password</p>
         </form>
         <p class="link" onclick="forgotPassword()">Forgot Password?</p>
-        <p class="link" onclick="window.location.href='file:///C:/Users/PC/Desktop/api/signup.html'">Create New Account</p>
+        <p class="link" onclick="window.location.href='signup.html'">Create New Account</p>
     </div>
 
     <!-- OTP Section (Hidden Initially) -->
@@ -112,7 +112,7 @@
 
             if (userFound) {
                 sessionStorage.setItem("username", username);
-                window.location.href = "file:///C:/Users/PC/Desktop/api/index.html"; // Redirect to homepage
+                window.location.href = "index.html"; // Redirect to homepage
             } else {
                 document.getElementById("error-message").style.display = "block";
             }
@@ -143,7 +143,7 @@
             const enteredOTP = document.getElementById("otp").value;
             if (enteredOTP === generatedOTP) {
                 alert("OTP Verified! You can now reset your password.");
-                window.location.href = "file:///C:/Users/PC/Desktop/api/reset%20pasword.html"; // Redirect to reset password page
+                window.location.href = "reset%20pasword.html"; // Redirect to reset password page
             } else {
                 document.getElementById("otp-error-message").style.display = "block";
             }
