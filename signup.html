@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('/Users/PC/Desktop/api/rt.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            width: 400px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: transparent;
+            border: 2px solid #28a745;
+            color: #28a745;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: rgba(40, 167, 69, 0.2);
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Signup</h2>
+        <input type="text" id="signup-username" placeholder="Username" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        <button onclick="registerUser()">Sign Up</button>
+        <p class="message" id="signup-message"></p>
+    </div>
+
+    <script>
+        function registerUser() {
+            const username = document.getElementById("signup-username").value;
+            const password = document.getElementById("signup-password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const message = document.getElementById("signup-message");
+
+            if (password !== confirmPassword) {
+                message.textContent = "Passwords do not match!";
+                message.style.display = "block";
+                return;
+            }
+
+            // Retrieve stored users or initialize an empty array
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if username already exists
+            if (users.some(user => user.username === username)) {
+                message.textContent = "Username already exists!";
+                message.style.display = "block";
+                return;
+            }
+
+            // Add new user to local storage
+            users.push({ username, password });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Signup successful! Redirecting to login...");
+            window.location.href = "file:///C:/Users/PC/Desktop/api/Login%20Page.html"; // Redirect to login page
+        }
+    </script>
+
+</body>
+</html>
